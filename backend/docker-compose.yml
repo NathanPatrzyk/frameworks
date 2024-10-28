@@ -1,0 +1,19 @@
+name: frameworks_stack
+
+services:
+  base_mariadb:
+    image: mariadb
+    container_name: frameworks_mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: frameworks
+    volumes:
+      - ${PWD}/mariadb:/var/lib/mysql
+    ports:
+      - "3307:3306"
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8080:8080"

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ProdutosController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,15 +15,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('produtos', function () {
-    $data = [
-        'produto' => [
-            'id' => 1,
-            'nome' => 'Produto Teste',
-            'preco' => 100,
-            'descricao' => 'Descricao do Produto Teste'
-        ]
-    ];
+Route::get('/produtos', [ProdutosController::class, 'index'])->name('home');
 
-    return response()->json($data, 200);
-});
+//Route::get('/produtos/{id}', [ProdutosController::class, 'show']);
+
+Route::get('/produtos/create', [ProdutosController::class, 'create'])->name('produtos.create');
+
+Route::post('/produtos', [ProdutosController::class, 'store']);
+
+Route::get('/produtos/{id}/delete', [ProdutosController::class, 'destroy']);
+
+Route::get('/produtos/{id}/update', [ProdutosController::class, 'edit']);
+
+Route::post('/produtos/{id}/update', [ProdutosController::class, 'update']);
