@@ -56,7 +56,14 @@ class ProdutosController extends Controller
         return view('produtos-update', ['produto' => $produtos]);
     }
 
-    public function update()
+    public function update(Request $request, string $id)
     {
+        $produtos = new Produtos();
+        $produtos = $produtos->find($id);
+        $produtos->update($request->except(['_token', '_method']));
+
+        $mensagem = "O produto " . $produtos->descricao . " foi atualizado";
+
+        return view('produtos-updated', ['mensagem' => $mensagem]);
     }
 }

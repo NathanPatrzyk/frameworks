@@ -5,6 +5,9 @@
 @section('content')
 <h2>Produtos</h2>
 <form method="POST" action="/produtos/{{$produto->id}}/update">
+  @csrf
+  <input type="hidden" name="_method" value="PUT">
+
   <div class="mb-4">
     <label for="descricao" class="form-label">Descrição: </label>
     <input name="descricao" type="text" class="form-control" value="{{$produto->descricao}}">
